@@ -1,5 +1,4 @@
-//Check if Safari or Chrome:
-
+//Main js script file
 
 
 //Store hooks and video sizes:
@@ -16,8 +15,7 @@ var yStart = 0;
 
 
 
-//const imageSize = 375;
-//const captureSize={w:100,h:50};//pxels
+
 const captureSize = {
   w: 150,
   h: 60
