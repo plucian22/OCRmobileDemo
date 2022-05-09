@@ -113,9 +113,6 @@ async function detectTFMOBILE(imgToPredict) {
 
 
 
-
-
-
 // Check if webcam access is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices &&
