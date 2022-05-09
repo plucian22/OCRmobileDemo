@@ -150,6 +150,8 @@ async function detectTFMOBILE(imgToPredict) {
   }
 }
 
+
+
 //Mark OCR area:
 function MarkArea(minX, minY, width_, height_, text) {
 
@@ -161,8 +163,9 @@ function MarkArea(minX, minY, width_, height_, text) {
     'width: ' + width_ + 'px; ' +
     'height: ' + height_ + 'px;';
   highlighter.innerHTML = '<p>' + text + '</p>';
+  
   liveView.appendChild(highlighter);
-  //canvas.appendChild(highlighter);
+  
   children.push(highlighter);
 
   if (text.length < 1) {
@@ -179,19 +182,12 @@ function MarkAreaSimple(minX, minY, width_, height_) {
   var highlighter = document.createElement('div');
   highlighter.setAttribute('class', 'highlighter_s');
 
-  //minX = (minX+width_/2).toFixed(0);
-  //minY= (minY+height_/2).toFixed(0);
-
-  //console.log('mxx',minX);
-  //console.log('my',minY);
-
   highlighter.style = 'left: ' + minX + 'px; ' +
     'top: ' + minY + 'px; ' +
     'width: ' + width_ + 'px; ' +
     'height: ' + height_ + 'px;';
-  //highlighter.innerHTML = '<p>'+ text +'</p>';
+  
   liveView.appendChild(highlighter);
-  //canvas.appendChild(highlighter);
   children.push(highlighter);
 
   return highlighter;
