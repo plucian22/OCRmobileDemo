@@ -19,8 +19,8 @@ const captureSize = {
   w: 150,
   h: 60
 }; //pxels
-//Match prob. threshold for object detection:
-var classProbThreshold = 0.4; //40%
+
+
 
 
 //Creating canvas for OCR:
