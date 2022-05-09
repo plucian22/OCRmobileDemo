@@ -15,20 +15,6 @@ video {
 }
 
 
-
-
-/*
-video {
-  width: 375px;
-  height: 375px;
-  position: fixed;
-  z-index: -1000;
-  left: 0;
-  top: 0;
-  background: black;
-  object-fit: cover;
-}
-*/
 #canvas {
   position: fixed;
   top: 0;
