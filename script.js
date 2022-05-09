@@ -140,15 +140,13 @@ async function detectTFMOBILE(imgToPredict) {
 
     tempMark.remove();
 
-    //MarkArea(click_pos.x,click_pos.y+captureSize.h/2,captureSize.w,captureSize.h,res);
     MarkArea(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h, res);
     Analyzef = false;
 
-    //window.location.href = 'sms://send?phone='+res.replaceAll('-','');
-    if (res.length >= 10)
+    //Can use the number to dial using whatsapp:
+    /* if (res.length >= 10)
       window.location.href = 'sms:' + res.replaceAll('-', '');
-
-    //window.location.href = 'whatsapp://send?phone='+res.replaceAll('-','');
+    */
   }
 }
 
