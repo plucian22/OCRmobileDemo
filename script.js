@@ -79,30 +79,7 @@ function renderFrame() {
 }
 
 
-//Image detects object that matches the preset:
-async function detectTFMOBILE(imgToPredict) {
 
-  //Get next video frame:
-  //Perform OCR:
-  if (Analyzef) 
-  {
-    c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
-      captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
-    let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
-
-    let res = await Recognize(c);
-
-    tempMark.remove();
-
-    MarkArea(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h, res);
-    Analyzef = false;
-
-    //We can use the number to dial using whatsapp:
-    /* if (res.length >= 10)
-      window.location.href = 'sms:' + res.replaceAll('-', '');
-    */
-  }
-}
 
 
 
@@ -188,6 +165,30 @@ function predictWebcamTF() {
   });
 }
 
+//Image detects object that matches the preset:
+async function detectTFMOBILE(imgToPredict) {
+
+  //Get next video frame:
+  //Perform OCR:
+  if (Analyzef) 
+  {
+    c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
+      captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
+    let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
+
+    let res = await Recognize(c);
+
+    tempMark.remove();
+
+    MarkArea(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h, res);
+    Analyzef = false;
+
+    //We can use the number to dial using whatsapp:
+    /* if (res.length >= 10)
+      window.location.href = 'sms:' + res.replaceAll('-', '');
+    */
+  }
+}
 
 
 //Mark OCR area:
