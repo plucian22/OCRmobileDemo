@@ -81,36 +81,6 @@ function renderFrame() {
 
 
 
-//Capture video on canvas the image:
-function Capture(e) {
-  
-  var initialX = 0,
-    initialY = 0;
-  if (e.type === "touchstart") {
-    initialX = e.touches[0].clientX;
-    initialY = e.touches[0].clientY;
-  } else {
-    initialX = e.clientX;
-    initialY = e.clientY;
-  }
-
-  let mouse = {
-    x: 0,
-    y: 0
-  };
-  mouse.x = initialX;
-  mouse.y = initialY;
-  mouse_pos = mouse;
-  console.log('mouse readings:', mouse);
-  xy = getCursorPosition(canvas, e);
-  console.log('click canvas readings:', xy);
-  click_pos = {
-    x: xy.x - (captureSize.w / 2),
-    y: (xy.y - captureSize.h / 2)
-  };
-  Analyzef = true;
-}
-
 
 
 //Detecting numbers in the pointed rectangle:
@@ -142,46 +112,6 @@ async function detectTFMOBILE(imgToPredict) {
 
 
 
-//Mark OCR area:
-function MarkArea(minX, minY, width_, height_, text) {
-
-  var highlighter = document.createElement('div');
-  highlighter.setAttribute('class', 'highlighter');
-
-  highlighter.style = 'left: ' + minX + 'px; ' +
-    'top: ' + minY + 'px; ' +
-    'width: ' + width_ + 'px; ' +
-    'height: ' + height_ + 'px;';
-  highlighter.innerHTML = '<p>' + text + '</p>';
-  
-  liveView.appendChild(highlighter);
-  
-  children.push(highlighter);
-
-  if (text.length < 1) {
-    liveView.removeChild(highlighter);
-  } else {
-    setTimeout(() => {
-      liveView.removeChild(highlighter);
-    }, 5000);
-  }
-}
-
-//Mark OCR area:
-function MarkAreaSimple(minX, minY, width_, height_) {
-  var highlighter = document.createElement('div');
-  highlighter.setAttribute('class', 'highlighter_s');
-
-  highlighter.style = 'left: ' + minX + 'px; ' +
-    'top: ' + minY + 'px; ' +
-    'width: ' + width_ + 'px; ' +
-    'height: ' + height_ + 'px;';
-  
-  liveView.appendChild(highlighter);
-  children.push(highlighter);
-
-  return highlighter;
-}
 
 
 
@@ -260,6 +190,83 @@ function predictWebcamTF() {
     window.requestAnimationFrame(predictWebcamTF);
     
   });
+}
+
+
+
+
+
+//Capture video on canvas the image:
+function Capture(e) {
+  
+  var initialX = 0,
+    initialY = 0;
+  if (e.type === "touchstart") {
+    initialX = e.touches[0].clientX;
+    initialY = e.touches[0].clientY;
+  } else {
+    initialX = e.clientX;
+    initialY = e.clientY;
+  }
+
+  let mouse = {
+    x: 0,
+    y: 0
+  };
+  mouse.x = initialX;
+  mouse.y = initialY;
+  mouse_pos = mouse;
+  console.log('mouse readings:', mouse);
+  xy = getCursorPosition(canvas, e);
+  console.log('click canvas readings:', xy);
+  click_pos = {
+    x: xy.x - (captureSize.w / 2),
+    y: (xy.y - captureSize.h / 2)
+  };
+  Analyzef = true;
+}
+
+
+
+//Mark OCR area:
+function MarkArea(minX, minY, width_, height_, text) {
+
+  var highlighter = document.createElement('div');
+  highlighter.setAttribute('class', 'highlighter');
+
+  highlighter.style = 'left: ' + minX + 'px; ' +
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
+  highlighter.innerHTML = '<p>' + text + '</p>';
+  
+  liveView.appendChild(highlighter);
+  
+  children.push(highlighter);
+
+  if (text.length < 1) {
+    liveView.removeChild(highlighter);
+  } else {
+    setTimeout(() => {
+      liveView.removeChild(highlighter);
+    }, 5000);
+  }
+}
+
+//Mark OCR area:
+function MarkAreaSimple(minX, minY, width_, height_) {
+  var highlighter = document.createElement('div');
+  highlighter.setAttribute('class', 'highlighter_s');
+
+  highlighter.style = 'left: ' + minX + 'px; ' +
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
+  
+  liveView.appendChild(highlighter);
+  children.push(highlighter);
+
+  return highlighter;
 }
 
 
