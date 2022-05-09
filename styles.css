@@ -77,7 +77,6 @@ button {
     position: fixed;
     display: grid;
     place-content: center;
-    /*animation: pop .25s cubic-bezier(.18,.89,.32,1.28), 5s .25s fade forwards;*/
     animation: .2s in, 5s .2s fade forwards;
     pointer-events: none;
     border-radius: 3px;
