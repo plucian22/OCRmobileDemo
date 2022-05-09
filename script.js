@@ -262,7 +262,7 @@ function enableCam(event) {
 
 //Call load function
 Init(); //async load tessaract model
-
+let model = true;
 
 
 
