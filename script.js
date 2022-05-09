@@ -35,6 +35,7 @@ var click_pos = {
   x: 0,
   y: 0
 };
+
 var mouse_pos = {
   x: 0,
   y: 0
@@ -130,7 +131,7 @@ async function detectTFMOBILE(imgToPredict) {
 
   //Get next video frame:
   //Perform OCR:
-  if (Analyzef) //Analyzef
+  if (Analyzef) 
   {
     c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
       captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
