@@ -100,7 +100,7 @@ function calculateSize(srcSize, dstSize) {
 }
 
 
-//Capture on canvas the image:
+//Capture video on canvas the image:
 function Capture(e) {
   
   var initialX = 0,
