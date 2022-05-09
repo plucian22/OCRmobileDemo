@@ -47,6 +47,8 @@ var context = canvas.getContext('2d');
 
 
 
+
+//Called on each frame render:
 function renderFrame() {
   
   // re-register callback
@@ -76,22 +78,7 @@ function renderFrame() {
 }
 
 
-//Streching image on canvas:
-function calculateSize(srcSize, dstSize) {
-  var srcRatio = srcSize.width / srcSize.height;
-  var dstRatio = dstSize.width / dstSize.height;
-  if (dstRatio > srcRatio) {
-    return {
-      width: dstSize.height * srcRatio,
-      height: dstSize.height
-    };
-  } else {
-    return {
-      width: dstSize.width,
-      height: dstSize.width / srcRatio
-    };
-  }
-}
+
 
 
 //Capture video on canvas the image:
@@ -274,6 +261,24 @@ function predictWebcamTF() {
 }
 
 
+
+
+//Streching image on canvas:
+function calculateSize(srcSize, dstSize) {
+  var srcRatio = srcSize.width / srcSize.height;
+  var dstRatio = dstSize.width / dstSize.height;
+  if (dstRatio > srcRatio) {
+    return {
+      width: dstSize.height * srcRatio,
+      height: dstSize.height
+    };
+  } else {
+    return {
+      width: dstSize.width,
+      height: dstSize.width / srcRatio
+    };
+  }
+}
 
 //Get click on canvas:
 function getCursorPosition(canvas, event) {
