@@ -50,6 +50,10 @@ var context = canvas.getContext('2d');
 
 
 
+
+//----Video capturing part:
+
+//Render frame handler
 function renderFrame() {
   
   // re-register callback
@@ -82,11 +86,6 @@ function renderFrame() {
 
 
 
-
-
-
-
-
 // Check if webcam access is supported.
 function getUserMediaSupported() {
   return !!(navigator.mediaDevices &&
@@ -108,9 +107,6 @@ function enableCam(event) {
   
   //Enable click event:
   canvas.addEventListener("mousedown", Capture);
-  /*canvas.addEventListener('mousedown', function(e) {
-    getCursorPosition(canvas, e)
-  });*/
 
   // Hide the button once clicked.
   enableWebcamButton.classList.add('removed');
@@ -154,7 +150,7 @@ Init();
 
 
 
-
+//-----Detection part:
 
 var children = [];
 //Perform prediction based on webcam using Layer model model:
@@ -192,6 +188,10 @@ async function detectTFMOBILE(imgToPredict) {
     */
   }
 }
+
+
+
+//-----Utils part:
 
 
 //Mark OCR area:
