@@ -1,11 +1,12 @@
 //Initate Tesseract model wasm using worker:
 
+
+
 //Glob variable OCR worker:
 const worker = Tesseract.createWorker({
   logger: m => console.log(m)
 });
 Tesseract.setLogging(true);
-
 
 
 
