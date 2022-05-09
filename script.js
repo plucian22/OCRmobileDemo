@@ -112,46 +112,6 @@ async function detectTFMOBILE(imgToPredict) {
 
 
 
-//Mark OCR area:
-function MarkArea(minX, minY, width_, height_, text) {
-
-  var highlighter = document.createElement('div');
-  highlighter.setAttribute('class', 'highlighter');
-
-  highlighter.style = 'left: ' + minX + 'px; ' +
-    'top: ' + minY + 'px; ' +
-    'width: ' + width_ + 'px; ' +
-    'height: ' + height_ + 'px;';
-  highlighter.innerHTML = '<p>' + text + '</p>';
-  
-  liveView.appendChild(highlighter);
-  
-  children.push(highlighter);
-
-  if (text.length < 1) {
-    liveView.removeChild(highlighter);
-  } else {
-    setTimeout(() => {
-      liveView.removeChild(highlighter);
-    }, 5000);
-  }
-}
-
-//Mark OCR area:
-function MarkAreaSimple(minX, minY, width_, height_) {
-  var highlighter = document.createElement('div');
-  highlighter.setAttribute('class', 'highlighter_s');
-
-  highlighter.style = 'left: ' + minX + 'px; ' +
-    'top: ' + minY + 'px; ' +
-    'width: ' + width_ + 'px; ' +
-    'height: ' + height_ + 'px;';
-  
-  liveView.appendChild(highlighter);
-  children.push(highlighter);
-
-  return highlighter;
-}
 
 
 
@@ -234,6 +194,46 @@ function predictWebcamTF() {
 
 
 
+//Mark OCR area:
+function MarkArea(minX, minY, width_, height_, text) {
+
+  var highlighter = document.createElement('div');
+  highlighter.setAttribute('class', 'highlighter');
+
+  highlighter.style = 'left: ' + minX + 'px; ' +
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
+  highlighter.innerHTML = '<p>' + text + '</p>';
+  
+  liveView.appendChild(highlighter);
+  
+  children.push(highlighter);
+
+  if (text.length < 1) {
+    liveView.removeChild(highlighter);
+  } else {
+    setTimeout(() => {
+      liveView.removeChild(highlighter);
+    }, 5000);
+  }
+}
+
+//Mark OCR area:
+function MarkAreaSimple(minX, minY, width_, height_) {
+  var highlighter = document.createElement('div');
+  highlighter.setAttribute('class', 'highlighter_s');
+
+  highlighter.style = 'left: ' + minX + 'px; ' +
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
+  
+  liveView.appendChild(highlighter);
+  children.push(highlighter);
+
+  return highlighter;
+}
 
 
 //Streching image on canvas:
