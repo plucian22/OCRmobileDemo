@@ -122,6 +122,7 @@ async function detectTFMOBILE(imgToPredict) {
   {
     c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
       captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
+    
     let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
 
     //Use tessaract to recognize the numbers:
