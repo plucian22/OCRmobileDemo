@@ -136,8 +136,11 @@ function enableCam(event) {
       //The start position of the video (from top left corner of the viewport)
       xStart = Math.floor((vw - vidWidth) / 2);
       yStart = (Math.floor((vh - vidHeight) / 2) >= 0) ? (Math.floor((vh - vidHeight) / 2)) : 0;
+      
       $video.play();
-
+      
+      //Hook the detection on loading data to video element:
+      $video.addEventListener('loadeddata', predictWebcamTF);
       renderFrame(); 
     }
   });
