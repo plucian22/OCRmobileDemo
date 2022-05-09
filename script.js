@@ -63,6 +63,7 @@ function renderFrame() {
   canvas.height = canvas.scrollHeight;
   
   if (video.readyState === video.HAVE_ENOUGH_DATA) {
+    
     // scale and horizontally center the camera image
     var videoSize = {
       width: video.videoWidth,
@@ -73,8 +74,8 @@ function renderFrame() {
       height: canvas.height
     };
     var renderSize = calculateSize(videoSize, canvasSize);
-    var xOffset = 0; //(canvasSize.width - renderSize.width) / 2;
-    var yOffset = 0; //(canvasSize.height - renderSize.height) / 2;
+    var xOffset = 0; 
+    var yOffset = 0; 
 
     context.drawImage(video, xOffset, yOffset, renderSize.width, renderSize.height);
   }
