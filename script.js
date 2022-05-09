@@ -181,7 +181,7 @@ let model = true;
 
 
 var children = [];
-//Perform prediction based on webcam using Layer model model:
+//Perform detection:
 function predictWebcamTF() {
   
   // Now let's start classifying a frame in the stream.
