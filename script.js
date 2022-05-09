@@ -165,9 +165,7 @@ function enableCam(event) {
       xStart = Math.floor((vw - vidWidth) / 2);
       yStart = (Math.floor((vh - vidHeight) / 2) >= 0) ? (Math.floor((vh - vidHeight) / 2)) : 0;
       $video.play();
-      //Attach detection model to loaded data event:
-      $video.addEventListener('loadeddata', predictWebcamTF);
-
+      
       renderFrame(); 
     }
   });
@@ -181,7 +179,7 @@ let model = true;
 
 
 var children = [];
-//Perform detection:
+//Perform detection of numbers:
 function predictWebcamTF() {
   
   // Now let's start classifying a frame in the stream.
