@@ -51,12 +51,17 @@ var Analyzef = false;
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
+
+
 function renderFrame() {
+  
   // re-register callback
   requestAnimationFrame(renderFrame);
+  
   // set internal canvas size to match HTML element size
   canvas.width = canvas.scrollWidth;
   canvas.height = canvas.scrollHeight;
+  
   if (video.readyState === video.HAVE_ENOUGH_DATA) {
     // scale and horizontally center the camera image
     var videoSize = {
@@ -213,7 +218,6 @@ if (getUserMediaSupported()) {
 
 
 
-
 // Enable the live webcam view and start detection.
 function enableCam(event) {
   
@@ -222,7 +226,6 @@ function enableCam(event) {
   canvas.addEventListener('mousedown', function(e) {
     getCursorPosition(canvas, e)
   });
-
 
   // Hide the button once clicked.
   enableWebcamButton.classList.add('removed');
@@ -266,10 +269,12 @@ let model = true;
 var children = [];
 //Perform prediction based on webcam using Layer model model:
 function predictWebcamTF() {
+  
   // Now let's start classifying a frame in the stream.
   detectTFMOBILE(video).then(function() {
     // Call this function again to keep predicting when the browser is ready.
     window.requestAnimationFrame(predictWebcamTF);
+    
   });
 }
 
