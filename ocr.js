@@ -16,8 +16,10 @@ async function Init()
   await worker.load();
   await worker.loadLanguage('eng');
   await worker.initialize('eng');
+  
   //Recognize only phone numbers:
   await worker.setParameters({ tessedit_char_whitelist: '0123456789+-',});
+  
   //Enable start button:
   enableWebcamButton.classList.remove('invisible');
   enableWebcamButton.innerHTML = 'Start camera';
