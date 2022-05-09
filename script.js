@@ -152,6 +152,7 @@ function enableCam(event) {
       facingMode: "environment"
     },
   }).then(stream => {
+    
     let $video = document.querySelector('video');
     $video.srcObject = stream;
     $video.onloadedmetadata = () => {
@@ -162,8 +163,6 @@ function enableCam(event) {
       xStart = Math.floor((vw - vidWidth) / 2);
       yStart = (Math.floor((vh - vidHeight) / 2) >= 0) ? (Math.floor((vh - vidHeight) / 2)) : 0;
       $video.play();
-      //Attach detection model to loaded data event:
-      $video.addEventListener('loadeddata', predictWebcamTF);
 
       renderFrame(); 
     }
