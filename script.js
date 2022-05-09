@@ -213,6 +213,8 @@ if (getUserMediaSupported()) {
   console.warn('getUserMedia() is not supported by your browser');
 }
 
+
+
 // Enable the live webcam view and start classification.
 function enableCam(event) {
   // Only continue if model has finished loading.
@@ -262,14 +264,14 @@ function enableCam(event) {
 
 
 var model = undefined;
-model_url = 'https://raw.githubusercontent.com/KostaMalsev/ImageRecognition/master/model/mobile_netv2/web_model2/model.json';
+//model_url = 'https://raw.githubusercontent.com/KostaMalsev/ImageRecognition/master/model/mobile_netv2/web_model2/model.json';
+
 //Call load function
 Init(); //async load tessaract model
-//asyncLoadModel(model_url);
 model = 2; //TBD
 
 
-
+/*
 //Function Loads the GraphModel type model of
 async function asyncLoadModel(model_url) {
   model = await tf.loadGraphModel(model_url);
@@ -278,7 +280,7 @@ async function asyncLoadModel(model_url) {
   enableWebcamButton.classList.remove('invisible');
   enableWebcamButton.innerHTML = 'Start camera';
 }
-
+*/
 
 
 var children = [];
