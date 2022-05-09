@@ -149,7 +149,7 @@ async function detectTFMOBILE(imgToPredict) {
     MarkArea(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h, res);
     Analyzef = false;
 
-    //Can use the number to dial using whatsapp:
+    //We can use the number to dial using whatsapp:
     /* if (res.length >= 10)
       window.location.href = 'sms:' + res.replaceAll('-', '');
     */
