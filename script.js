@@ -13,9 +13,6 @@ var vidHeight = 0;
 var xStart = 0;
 var yStart = 0;
 
-
-
-
 const captureSize = {
   w: 150,
   h: 60
@@ -25,7 +22,7 @@ const captureSize = {
 
 //Creating canvas for OCR:
 const c = document.createElement('canvas');
-//const c = document.getElementById('canvas');
+
 c.width = captureSize.w;
 c.height = captureSize.h;
 var click_pos = {
