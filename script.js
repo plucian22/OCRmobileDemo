@@ -82,53 +82,6 @@ function renderFrame() {
 }
 
 
-//Streching image on canvas:
-function calculateSize(srcSize, dstSize) {
-  var srcRatio = srcSize.width / srcSize.height;
-  var dstRatio = dstSize.width / dstSize.height;
-  if (dstRatio > srcRatio) {
-    return {
-      width: dstSize.height * srcRatio,
-      height: dstSize.height
-    };
-  } else {
-    return {
-      width: dstSize.width,
-      height: dstSize.width / srcRatio
-    };
-  }
-}
-
-
-//Capture video on canvas the image:
-function Capture(e) {
-  
-  var initialX = 0,
-    initialY = 0;
-  if (e.type === "touchstart") {
-    initialX = e.touches[0].clientX;
-    initialY = e.touches[0].clientY;
-  } else {
-    initialX = e.clientX;
-    initialY = e.clientY;
-  }
-
-  let mouse = {
-    x: 0,
-    y: 0
-  };
-  mouse.x = initialX;
-  mouse.y = initialY;
-  mouse_pos = mouse;
-  console.log('mouse readings:', mouse);
-  xy = getCursorPosition(canvas, e);
-  console.log('click canvas readings:', xy);
-  click_pos = {
-    x: xy.x - (captureSize.w / 2),
-    y: (xy.y - captureSize.h / 2)
-  };
-  Analyzef = true;
-}
 
 
 
@@ -279,6 +232,57 @@ function predictWebcamTF() {
   });
 }
 
+
+
+
+
+//Streching image on canvas:
+function calculateSize(srcSize, dstSize) {
+  var srcRatio = srcSize.width / srcSize.height;
+  var dstRatio = dstSize.width / dstSize.height;
+  if (dstRatio > srcRatio) {
+    return {
+      width: dstSize.height * srcRatio,
+      height: dstSize.height
+    };
+  } else {
+    return {
+      width: dstSize.width,
+      height: dstSize.width / srcRatio
+    };
+  }
+}
+
+
+//Capture video on canvas the image:
+function Capture(e) {
+  
+  var initialX = 0,
+    initialY = 0;
+  if (e.type === "touchstart") {
+    initialX = e.touches[0].clientX;
+    initialY = e.touches[0].clientY;
+  } else {
+    initialX = e.clientX;
+    initialY = e.clientY;
+  }
+
+  let mouse = {
+    x: 0,
+    y: 0
+  };
+  mouse.x = initialX;
+  mouse.y = initialY;
+  mouse_pos = mouse;
+  console.log('mouse readings:', mouse);
+  xy = getCursorPosition(canvas, e);
+  console.log('click canvas readings:', xy);
+  click_pos = {
+    x: xy.x - (captureSize.w / 2),
+    y: (xy.y - captureSize.h / 2)
+  };
+  Analyzef = true;
+}
 
 
 //Get click on canvas:
