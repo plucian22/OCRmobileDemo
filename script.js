@@ -38,7 +38,7 @@ var mouse_pos = {
   y: 0
 };
 
-
+//Glob flag to indicate that detection is needed:
 var Analyzef = false;
 
 
@@ -162,6 +162,8 @@ function predictWebcamTF() {
   });
 }
 
+
+
 //Image detects object that matches the preset:
 async function detectTFMOBILE(imgToPredict) {
 
@@ -173,6 +175,7 @@ async function detectTFMOBILE(imgToPredict) {
       captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
     let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
 
+    //Identify the digits using tesssaract:
     let res = await Recognize(c);
 
     tempMark.remove();
@@ -190,8 +193,6 @@ async function detectTFMOBILE(imgToPredict) {
 
 
 //-----UI and Utils part:
-
-
 
 
 //Mark the OCR area:
