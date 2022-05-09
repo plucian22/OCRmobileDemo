@@ -217,9 +217,9 @@ if (getUserMediaSupported()) {
 // Enable the live webcam view and start detection.
 function enableCam(event) {
   // Only continue if model has finished loading.
-  if (!model) {
+  /*if (!model) {
     return;
-  }
+  }*/
   //Enable click event:
   canvas.addEventListener("mousedown", Capture, false);
   canvas.addEventListener('mousedown', function(e) {
