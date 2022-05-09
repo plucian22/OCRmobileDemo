@@ -79,9 +79,6 @@ function renderFrame() {
 }
 
 
-
-
-
 //Image detects object that matches the preset:
 async function detectTFMOBILE(imgToPredict) {
 
@@ -170,8 +167,12 @@ function enableCam(event) {
 }
 
 
+
+
 //Async load of tessaract model
 Init(); 
+
+
 
 
 
