@@ -211,16 +211,16 @@ if (getUserMediaSupported()) {
 
 
 
-// Enable the live webcam view and start classification.
+
+
+// Enable the live webcam view and start detection.
 function enableCam(event) {
   // Only continue if model has finished loading.
   if (!model) {
     return;
   }
   //Enable click event:
-  //document.addEventListener("mousedown", Capture, false);
   canvas.addEventListener("mousedown", Capture, false);
-  //const canvas = document.querySelector('canvas')
   canvas.addEventListener('mousedown', function(e) {
     getCursorPosition(canvas, e)
   });
@@ -245,6 +245,7 @@ function enableCam(event) {
     $video.onloadedmetadata = () => {
       vidWidth = $video.videoHeight;
       vidHeight = $video.videoWidth;
+      
       //The start position of the video (from top left corner of the viewport)
       xStart = Math.floor((vw - vidWidth) / 2);
       yStart = (Math.floor((vh - vidHeight) / 2) >= 0) ? (Math.floor((vh - vidHeight) / 2)) : 0;
@@ -252,7 +253,7 @@ function enableCam(event) {
       //Attach detection model to loaded data event:
       $video.addEventListener('loadeddata', predictWebcamTF);
 
-      renderFrame(); //TBD
+      renderFrame(); 
     }
   });
 }
@@ -276,21 +277,12 @@ function predictWebcamTF() {
 
 
 
-
-
-
-
-
 //Get click on canvas:
 function getCursorPosition(canvas, event) {
   const rect = canvas.getBoundingClientRect()
   const x = event.clientX - rect.left
   const y = event.clientY - rect.top
-  //console.log("x: " + x + " y: " + y);
-  return {
-    x,
-    y
-  };
+  return {x,y};
 }
 
 
