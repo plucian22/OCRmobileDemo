@@ -154,12 +154,6 @@ function MarkArea(minX, minY,width_,height_,text) {
   var highlighter = document.createElement('div');
   highlighter.setAttribute('class', 'highlighter');
 
-  //minX = (minX+width_/2).toFixed(0);
-  //minY= (minY+height_/2).toFixed(0);
-
-  //console.log('mxx',minX);
-  //console.log('my',minY);
-
   highlighter.style = 'left: ' + minX + 'px; ' +
       'top: ' + minY + 'px; ' +
       'width: ' + width_ + 'px; ' +
