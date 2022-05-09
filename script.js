@@ -262,25 +262,10 @@ function enableCam(event) {
 }
 
 
-
-var model = undefined;
-//model_url = 'https://raw.githubusercontent.com/KostaMalsev/ImageRecognition/master/model/mobile_netv2/web_model2/model.json';
-
 //Call load function
 Init(); //async load tessaract model
-model = 2; //TBD
 
 
-/*
-//Function Loads the GraphModel type model of
-async function asyncLoadModel(model_url) {
-  model = await tf.loadGraphModel(model_url);
-  console.log('Model loaded');
-  //Enable start button:
-  enableWebcamButton.classList.remove('invisible');
-  enableWebcamButton.innerHTML = 'Start camera';
-}
-*/
 
 
 var children = [];
@@ -296,37 +281,7 @@ function predictWebcamTF() {
 
 
 
-//Function Renders boxes around the detections:
-function renderPredictionBoxes(predictionBoxes, predictionClasses, predictionScores) {
-  //Remove all detections:
-  for (let i = 0; i < children.length; i++) {
-    liveView.removeChild(children[i]);
-  }
-  children.splice(0);
-  //Loop through predictions and draw them to the live view if they have a high confidence score.
-  for (let i = 0; i < 99; i++) {
-    //If we are over 66% sure we are sure we classified it right, draw it!
-    const minY = (predictionBoxes[i * 4] * vidHeight + yStart).toFixed(0);
-    const minX = (predictionBoxes[i * 4 + 1] * vidWidth + xStart).toFixed(0);
-    const maxY = (predictionBoxes[i * 4 + 2] * vidHeight + yStart).toFixed(0);
-    const maxX = (predictionBoxes[i * 4 + 3] * vidWidth + xStart).toFixed(0);
-    const score = predictionScores[i * 3] * 100;
-    const width_ = (maxX - minX).toFixed(0);
-    const height_ = (maxY - minY).toFixed(0);
-    //If confidence is above 70%
-    if (score > 70 && score < 100) {
-      const highlighter = document.createElement('div');
-      highlighter.setAttribute('class', 'highlighter');
-      highlighter.style = 'left: ' + minX + 'px; ' +
-        'top: ' + minY + 'px; ' +
-        'width: ' + width_ + 'px; ' +
-        'height: ' + height_ + 'px;';
-      highlighter.innerHTML = '<p>' + Math.round(score) + '% ' + 'Your Object Name' + '</p>';
-      liveView.appendChild(highlighter);
-      children.push(highlighter);
-    }
-  }
-}
+
 
 
 
