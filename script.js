@@ -1,4 +1,3 @@
-
 //Check if Safari or Chrome:
 
 
@@ -31,9 +30,12 @@ var yStart = 0;
 
 const imageSize = 375;
 //const captureSize={w:100,h:50};//pxels
-const captureSize={w:150,h:60};//pxels
+const captureSize = {
+  w: 150,
+  h: 60
+}; //pxels
 //Match prob. threshold for object detection:
-var classProbThreshold = 0.4;//40%
+var classProbThreshold = 0.4; //40%
 
 
 //Creating canvas for OCR:
@@ -41,12 +43,17 @@ const c = document.createElement('canvas');
 //const c = document.getElementById('canvas');
 c.width = captureSize.w;
 c.height = captureSize.h;
-var click_pos = {x:0, y:0};
-var mouse_pos = {x:0, y:0};
+var click_pos = {
+  x: 0,
+  y: 0
+};
+var mouse_pos = {
+  x: 0,
+  y: 0
+};
 
 
-var Analyzef=false;
-
+var Analyzef = false;
 
 
 
@@ -63,11 +70,17 @@ function renderFrame() {
   canvas.height = canvas.scrollHeight;
   if (video.readyState === video.HAVE_ENOUGH_DATA) {
     // scale and horizontally center the camera image
-    var videoSize = { width: video.videoWidth, height: video.videoHeight };
-    var canvasSize = { width: canvas.width, height: canvas.height };
+    var videoSize = {
+      width: video.videoWidth,
+      height: video.videoHeight
+    };
+    var canvasSize = {
+      width: canvas.width,
+      height: canvas.height
+    };
     var renderSize = calculateSize(videoSize, canvasSize);
-    var xOffset = 0;//(canvasSize.width - renderSize.width) / 2;
-    var yOffset = 0;//(canvasSize.height - renderSize.height) / 2;
+    var xOffset = 0; //(canvasSize.width - renderSize.width) / 2;
+    var yOffset = 0; //(canvasSize.height - renderSize.height) / 2;
 
     context.drawImage(video, xOffset, yOffset, renderSize.width, renderSize.height);
   }
@@ -76,30 +89,30 @@ function renderFrame() {
 
 //Streching image on canvas:
 function calculateSize(srcSize, dstSize) {
-    var srcRatio = srcSize.width / srcSize.height;
-    var dstRatio = dstSize.width / dstSize.height;
-    if (dstRatio > srcRatio) {
-      return {
-        width:  dstSize.height * srcRatio,
-        height: dstSize.height
-      };
-    } else {
-      return {
-        width:  dstSize.width,
-        height: dstSize.width / srcRatio
-      };
-    }
+  var srcRatio = srcSize.width / srcSize.height;
+  var dstRatio = dstSize.width / dstSize.height;
+  if (dstRatio > srcRatio) {
+    return {
+      width: dstSize.height * srcRatio,
+      height: dstSize.height
+    };
+  } else {
+    return {
+      width: dstSize.width,
+      height: dstSize.width / srcRatio
+    };
   }
+}
 
 
 //Capture on canvas the image:
-function Capture(e)
-{
+function Capture(e) {
   /*
   mouse.x = (event.mouseX / gwidth) * 2 - 1;
   mouse.y = -(event.mouseY / gheight) * 2 + 1;
   */
-  var initialX=0,initialY=0;
+  var initialX = 0,
+    initialY = 0;
   if (e.type === "touchstart") {
     initialX = e.touches[0].clientX;
     initialY = e.touches[0].clientY;
@@ -108,15 +121,21 @@ function Capture(e)
     initialY = e.clientY;
   }
 
-  let mouse= {x:0,y:0};
+  let mouse = {
+    x: 0,
+    y: 0
+  };
   mouse.x = initialX;
   mouse.y = initialY;
   mouse_pos = mouse;
   console.log('mouse readings:', mouse);
   xy = getCursorPosition(canvas, e);
   console.log('click canvas readings:', xy);
-  click_pos = {x: xy.x-(captureSize.w/2), y: (xy.y-captureSize.h/2)};
-  Analyzef=true;
+  click_pos = {
+    x: xy.x - (captureSize.w / 2),
+    y: (xy.y - captureSize.h / 2)
+  };
+  Analyzef = true;
 }
 
 
@@ -126,39 +145,39 @@ async function detectTFMOBILE(imgToPredict) {
 
   //Get next video frame:
   //Perform OCR:
-  if(Analyzef)//Analyzef
+  if (Analyzef) //Analyzef
   {
-     c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
-      captureSize.w, captureSize.h,0,0,captureSize.w, captureSize.h);
-    let tempMark = MarkAreaSimple(mouse_pos.x-captureSize.w/2,mouse_pos.y-captureSize.h/2,captureSize.w,captureSize.h);
+    c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
+      captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
+    let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
 
     let res = await Recognize(c);
 
     tempMark.remove();
 
     //MarkArea(click_pos.x,click_pos.y+captureSize.h/2,captureSize.w,captureSize.h,res);
-    MarkArea(mouse_pos.x-captureSize.w/2,mouse_pos.y-captureSize.h/2,captureSize.w,captureSize.h,res);
-    Analyzef=false;
+    MarkArea(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h, res);
+    Analyzef = false;
 
     //window.location.href = 'sms://send?phone='+res.replaceAll('-','');
-    if(res.length>=10)
-      window.location.href = 'sms:'+ res.replaceAll('-','');
+    if (res.length >= 10)
+      window.location.href = 'sms:' + res.replaceAll('-', '');
 
     //window.location.href = 'whatsapp://send?phone='+res.replaceAll('-','');
   }
 }
 
 //Mark OCR area:
-function MarkArea(minX, minY,width_,height_,text) {
+function MarkArea(minX, minY, width_, height_, text) {
 
   var highlighter = document.createElement('div');
   highlighter.setAttribute('class', 'highlighter');
 
   highlighter.style = 'left: ' + minX + 'px; ' +
-      'top: ' + minY + 'px; ' +
-      'width: ' + width_ + 'px; ' +
-      'height: ' + height_ + 'px;';
-  highlighter.innerHTML = '<p>'+ text +'</p>';
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
+  highlighter.innerHTML = '<p>' + text + '</p>';
   liveView.appendChild(highlighter);
   //canvas.appendChild(highlighter);
   children.push(highlighter);
@@ -173,7 +192,7 @@ function MarkArea(minX, minY,width_,height_,text) {
 }
 
 //Mark OCR area:
-function MarkAreaSimple(minX, minY,width_,height_) {
+function MarkAreaSimple(minX, minY, width_, height_) {
   var highlighter = document.createElement('div');
   highlighter.setAttribute('class', 'highlighter_s');
 
@@ -184,9 +203,9 @@ function MarkAreaSimple(minX, minY,width_,height_) {
   //console.log('my',minY);
 
   highlighter.style = 'left: ' + minX + 'px; ' +
-      'top: ' + minY + 'px; ' +
-      'width: ' + width_ + 'px; ' +
-      'height: ' + height_ + 'px;';
+    'top: ' + minY + 'px; ' +
+    'width: ' + width_ + 'px; ' +
+    'height: ' + height_ + 'px;';
   //highlighter.innerHTML = '<p>'+ text +'</p>';
   liveView.appendChild(highlighter);
   //canvas.appendChild(highlighter);
@@ -198,22 +217,17 @@ function MarkAreaSimple(minX, minY,width_,height_) {
 
 
 
-
-
-
-
-
 // Check if webcam access is supported.
 function getUserMediaSupported() {
-    return !!(navigator.mediaDevices &&
-        navigator.mediaDevices.getUserMedia);
+  return !!(navigator.mediaDevices &&
+    navigator.mediaDevices.getUserMedia);
 }
 
 // If webcam supported, add event listener to activation button:
 if (getUserMediaSupported()) {
-    enableWebcamButton.addEventListener('click', enableCam);
+  enableWebcamButton.addEventListener('click', enableCam);
 } else {
-    console.warn('getUserMedia() is not supported by your browser');
+  console.warn('getUserMedia() is not supported by your browser');
 }
 
 // Enable the live webcam view and start classification.
@@ -227,7 +241,7 @@ function enableCam(event) {
   canvas.addEventListener("mousedown", Capture, false);
   //const canvas = document.querySelector('canvas')
   canvas.addEventListener('mousedown', function(e) {
-      getCursorPosition(canvas, e)
+    getCursorPosition(canvas, e)
   });
 
 
@@ -252,12 +266,12 @@ function enableCam(event) {
       vidHeight = $video.videoWidth;
       //The start position of the video (from top left corner of the viewport)
       xStart = Math.floor((vw - vidWidth) / 2);
-      yStart = (Math.floor((vh - vidHeight) / 2)>=0) ? (Math.floor((vh - vidHeight) / 2)):0;
+      yStart = (Math.floor((vh - vidHeight) / 2) >= 0) ? (Math.floor((vh - vidHeight) / 2)) : 0;
       $video.play();
       //Attach detection model to loaded data event:
       $video.addEventListener('loadeddata', predictWebcamTF);
 
-      renderFrame();//TBD
+      renderFrame(); //TBD
     }
   });
 }
@@ -267,19 +281,19 @@ function enableCam(event) {
 var model = undefined;
 model_url = 'https://raw.githubusercontent.com/KostaMalsev/ImageRecognition/master/model/mobile_netv2/web_model2/model.json';
 //Call load function
-Init();//async load tessaract model
+Init(); //async load tessaract model
 //asyncLoadModel(model_url);
-model = 2;//TBD
+model = 2; //TBD
 
 
 
 //Function Loads the GraphModel type model of
 async function asyncLoadModel(model_url) {
-    model = await tf.loadGraphModel(model_url);
-    console.log('Model loaded');
-    //Enable start button:
-    enableWebcamButton.classList.remove('invisible');
-    enableWebcamButton.innerHTML = 'Start camera';
+  model = await tf.loadGraphModel(model_url);
+  console.log('Model loaded');
+  //Enable start button:
+  enableWebcamButton.classList.remove('invisible');
+  enableWebcamButton.innerHTML = 'Start camera';
 }
 
 
@@ -287,97 +301,67 @@ async function asyncLoadModel(model_url) {
 var children = [];
 //Perform prediction based on webcam using Layer model model:
 function predictWebcamTF() {
-    // Now let's start classifying a frame in the stream.
-    detectTFMOBILE(video).then(function () {
-        // Call this function again to keep predicting when the browser is ready.
-        window.requestAnimationFrame(predictWebcamTF);
-    });
+  // Now let's start classifying a frame in the stream.
+  detectTFMOBILE(video).then(function() {
+    // Call this function again to keep predicting when the browser is ready.
+    window.requestAnimationFrame(predictWebcamTF);
+  });
 }
 
 
 
 
-
-
-
-
-
 //Function Renders boxes around the detections:
-function renderPredictionBoxes (predictionBoxes, predictionClasses, predictionScores)
-{
-    //Remove all detections:
-    for (let i = 0; i < children.length; i++) {
-        liveView.removeChild(children[i]);
+function renderPredictionBoxes(predictionBoxes, predictionClasses, predictionScores) {
+  //Remove all detections:
+  for (let i = 0; i < children.length; i++) {
+    liveView.removeChild(children[i]);
+  }
+  children.splice(0);
+  //Loop through predictions and draw them to the live view if they have a high confidence score.
+  for (let i = 0; i < 99; i++) {
+    //If we are over 66% sure we are sure we classified it right, draw it!
+    const minY = (predictionBoxes[i * 4] * vidHeight + yStart).toFixed(0);
+    const minX = (predictionBoxes[i * 4 + 1] * vidWidth + xStart).toFixed(0);
+    const maxY = (predictionBoxes[i * 4 + 2] * vidHeight + yStart).toFixed(0);
+    const maxX = (predictionBoxes[i * 4 + 3] * vidWidth + xStart).toFixed(0);
+    const score = predictionScores[i * 3] * 100;
+    const width_ = (maxX - minX).toFixed(0);
+    const height_ = (maxY - minY).toFixed(0);
+    //If confidence is above 70%
+    if (score > 70 && score < 100) {
+      const highlighter = document.createElement('div');
+      highlighter.setAttribute('class', 'highlighter');
+      highlighter.style = 'left: ' + minX + 'px; ' +
+        'top: ' + minY + 'px; ' +
+        'width: ' + width_ + 'px; ' +
+        'height: ' + height_ + 'px;';
+      highlighter.innerHTML = '<p>' + Math.round(score) + '% ' + 'Your Object Name' + '</p>';
+      liveView.appendChild(highlighter);
+      children.push(highlighter);
     }
-    children.splice(0);
-//Loop through predictions and draw them to the live view if they have a high confidence score.
-    for (let i = 0; i < 99; i++) {
-//If we are over 66% sure we are sure we classified it right, draw it!
-        const minY = (predictionBoxes[i * 4] * vidHeight+yStart).toFixed(0);
-        const minX = (predictionBoxes[i * 4 + 1] * vidWidth+xStart).toFixed(0);
-        const maxY = (predictionBoxes[i * 4 + 2] * vidHeight+yStart).toFixed(0);
-        const maxX = (predictionBoxes[i * 4 + 3] * vidWidth+xStart).toFixed(0);
-        const score = predictionScores[i * 3] * 100;
-const width_ = (maxX-minX).toFixed(0);
-        const height_ = (maxY-minY).toFixed(0);
-//If confidence is above 70%
-        if (score > 70 && score < 100){
-            const highlighter = document.createElement('div');
-            highlighter.setAttribute('class', 'highlighter');
-            highlighter.style = 'left: ' + minX + 'px; ' +
-                'top: ' + minY + 'px; ' +
-                'width: ' + width_ + 'px; ' +
-                'height: ' + height_ + 'px;';
-            highlighter.innerHTML = '<p>'+Math.round(score) + '% ' + 'Your Object Name'+'</p>';
-            liveView.appendChild(highlighter);
-            children.push(highlighter);
-        }
-    }
+  }
 }
 
 
 
 //Get click on canvas:
 function getCursorPosition(canvas, event) {
-    const rect = canvas.getBoundingClientRect()
-    const x = event.clientX - rect.left
-    const y = event.clientY - rect.top
-    //console.log("x: " + x + " y: " + y);
-    return {x,y};
+  const rect = canvas.getBoundingClientRect()
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+  //console.log("x: " + x + " y: " + y);
+  return {
+    x,
+    y
+  };
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //If compatible browser:
-function IsCompatibleBrowser()
-{
+function IsCompatibleBrowser() {
 
   // Opera 8.0+
   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -386,10 +370,12 @@ function IsCompatibleBrowser()
   var isFirefox = typeof InstallTrigger !== 'undefined';
 
   // Safari 3.0+ "[object HTMLElementConstructor]"
-  var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+  var isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+    return p.toString() === "[object SafariRemoteNotification]";
+  })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
 
   // Internet Explorer 6-11
-  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  var isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
   // Edge 20+
   var isEdge = !isIE && !!window.StyleMedia;
@@ -403,10 +389,9 @@ function IsCompatibleBrowser()
   // Blink engine detection
   var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-  if(!isChrome && !isSafari && !isFirefox)
-  {
+  if (!isChrome && !isSafari && !isFirefox) {
     return false
-  }else{
+  } else {
     return true;
   }
 }
