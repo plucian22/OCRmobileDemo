@@ -116,9 +116,6 @@ function Capture(e)
   xy = getCursorPosition(canvas, e);
   console.log('click canvas readings:', xy);
   click_pos = {x: xy.x-(captureSize.w/2), y: (xy.y-captureSize.h/2)};
-
-  //click_pos = {x: mouse.x-(captureSize.w/2), y: (mouse.y-captureSize.h/2)};//update click pos
-  //MarkArea(mouse.x-captureSize.w/2, mouse.y-captureSize.h/2,captureSize.w,captureSize.h);
   Analyzef=true;
 }
 
