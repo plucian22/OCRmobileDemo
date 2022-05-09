@@ -189,7 +189,7 @@ async function detectTFMOBILE(imgToPredict) {
 
 
 
-//-----Utils part:
+//-----UI and Utils part:
 
 
 //Mark OCR area:
@@ -273,18 +273,24 @@ function Capture(e) {
   mouse.y = initialY;
   mouse_pos = mouse;
   console.log('mouse readings:', mouse);
+  
   xy = getCursorPosition(canvas, e);
+  
   console.log('click canvas readings:', xy);
+  
   click_pos = {
     x: xy.x - (captureSize.w / 2),
     y: (xy.y - captureSize.h / 2)
   };
+  
+  //Update the global flag that this frame is for number detection:
   Analyzef = true;
 }
 
 
 //Get click on canvas:
 function getCursorPosition(canvas, event) {
+  
   const rect = canvas.getBoundingClientRect()
   const x = event.clientX - rect.left
   const y = event.clientY - rect.top
