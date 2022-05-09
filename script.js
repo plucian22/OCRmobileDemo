@@ -125,6 +125,7 @@ function enableCam(event) {
     
     let $video = document.querySelector('video');
     $video.srcObject = stream;
+    
     $video.onloadedmetadata = () => {
       vidWidth = $video.videoHeight;
       vidHeight = $video.videoWidth;
@@ -145,12 +146,9 @@ function enableCam(event) {
 
 
 
+//-----Detection part:
 //Async load of tessaract model
 Init(); 
-
-
-
-//-----Detection part:
 
 var children = [];
 //Perform prediction based on webcam using Layer model model:
