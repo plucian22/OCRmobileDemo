@@ -131,10 +131,7 @@ async function detectTFMOBILE(imgToPredict) {
   //Perform OCR:
   if(Analyzef)//Analyzef
   {
-    //c.getContext('2d').drawImage(video, click_pos.x, click_pos.y, captureSize, captureSize);
-    //c.getContext('2d').drawImage(video, click_pos.x, click_pos.y, captureSize.w, captureSize.h);
-    //c.getContext('2d').drawImage(video, click_pos.x, click_pos.y, captureSize.w, captureSize.h,0,0,captureSize.w, captureSize.h);
-    c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
+     c.getContext('2d').drawImage(canvas, click_pos.x, click_pos.y,
       captureSize.w, captureSize.h,0,0,captureSize.w, captureSize.h);
 
     //MarkArea(mouse_pos.x-captureSize.w/2,mouse_pos.y-captureSize.h/2,
