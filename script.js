@@ -107,10 +107,10 @@ if (getUserMediaSupported()) {
 function enableCam(event) {
   
   //Enable click event:
-  canvas.addEventListener("mousedown", Capture, false);
-  canvas.addEventListener('mousedown', function(e) {
+  canvas.addEventListener("mousedown", Capture);
+  /*canvas.addEventListener('mousedown', function(e) {
     getCursorPosition(canvas, e)
-  });
+  });*/
 
   // Hide the button once clicked.
   enableWebcamButton.classList.add('removed');
