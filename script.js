@@ -48,7 +48,7 @@ var context = canvas.getContext('2d');
 
 
 
-//Called on each frame render:
+//Called on frame render event:
 function renderFrame() {
   
   // re-register callback
