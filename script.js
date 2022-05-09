@@ -1,18 +1,6 @@
 //Check if Safari or Chrome:
 
 
-//window.open("googlechrome://navigate?url=" + url,"_system");
-//window.open("googlechrome://navigate?url=" + "www.google.com","_system");
-
-/*if(!IsCompatibleBrowser())
-{
-  window.open(
-    "googlechrome://navigate?url=" + "www.google.com",
-    "_system"
-  );
-}
-*/
-
 
 //Store hooks and video sizes:
 const video = document.getElementById('webcam');
@@ -107,10 +95,7 @@ function calculateSize(srcSize, dstSize) {
 
 //Capture on canvas the image:
 function Capture(e) {
-  /*
-  mouse.x = (event.mouseX / gwidth) * 2 - 1;
-  mouse.y = -(event.mouseY / gheight) * 2 + 1;
-  */
+  
   var initialX = 0,
     initialY = 0;
   if (e.type === "touchstart") {
