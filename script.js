@@ -149,14 +149,16 @@ function enableCam(event) {
     video: true
   };
 
-  // Stream video from VAR (for safari also)
+  // Stream video to video element
   navigator.mediaDevices.getUserMedia({
     video: {
       facingMode: "environment"
     },
   }).then(stream => {
     let $video = document.querySelector('video');
+    
     $video.srcObject = stream;
+    
     $video.onloadedmetadata = () => {
       vidWidth = $video.videoHeight;
       vidHeight = $video.videoWidth;
