@@ -45,13 +45,3 @@ async function ShutDownWorker()
   await worker.terminate();
 }
 
-
-
-
-
-
-
-
-//For detection of text use: (in our case it's not needed, and it has limitations of minimum of 30 characters)
-//let result = await worker.detect(exampleImage[ind]);
-//console.log(result.data);
