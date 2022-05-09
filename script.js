@@ -113,7 +113,7 @@ function Capture(e) {
 
 
 
-//Image detects object that matches the preset:
+//Detecting numbers in the pointed rectangle:
 async function detectTFMOBILE(imgToPredict) {
 
   //Get next video frame:
@@ -124,6 +124,7 @@ async function detectTFMOBILE(imgToPredict) {
       captureSize.w, captureSize.h, 0, 0, captureSize.w, captureSize.h);
     let tempMark = MarkAreaSimple(mouse_pos.x - captureSize.w / 2, mouse_pos.y - captureSize.h / 2, captureSize.w, captureSize.h);
 
+    //Use tessaract to recognize the numbers:
     let res = await Recognize(c);
 
     tempMark.remove();
